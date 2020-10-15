@@ -441,7 +441,7 @@ Vue.component("display-auth-result", {
         <div class="field">
           <label for="txt_auth_response" class="label is-medium" style="font-family: 'Roboto Mono', monospace;">Headers</label>
           <div class="control">
-            <textarea cols="30" rows="9" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.headers}}</textarea>
+            <textarea cols="30" rows="5" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.headers}}</textarea>
           </div>
         </div>
       </div>
@@ -450,14 +450,11 @@ Vue.component("display-auth-result", {
         <div class="field">
           <label for="txt_auth_response" class="label is-medium" style="font-family: 'Roboto Mono', monospace;">Config</label>
           <div class="control">
-            <textarea cols="30" rows="9" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.config}}</textarea>
+            <textarea cols="30" rows="5" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.config}}</textarea>
           </div>
         </div>
       </div>
     </div>
-
-
-      
 
       
 
@@ -489,7 +486,7 @@ Vue.component("display-result", {
           <div class="field">
             <label for="txt_auth_response" class="label is-medium" style="font-family: 'Roboto Mono', monospace;">Headers</label>
             <div class="control">
-              <textarea cols="30" rows="9" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.headers}}</textarea>
+              <textarea cols="30" rows="5" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.headers}}</textarea>
             </div>
           </div>
         </div>
@@ -498,7 +495,7 @@ Vue.component("display-result", {
           <div class="field">
             <label for="txt_auth_response" class="label is-medium" style="font-family: 'Roboto Mono', monospace;">Config</label>
             <div class="control">
-              <textarea cols="30" rows="9" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.config}}</textarea>
+              <textarea cols="30" rows="5" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.config}}</textarea>
             </div>
           </div>
         </div>
