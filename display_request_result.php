@@ -19,7 +19,7 @@
 
 <body>
   <!-- hero -->
-  <section class="hero is-dark is-bold" style="font-family: 'Roboto Mono', monospace;">
+  <section class="hero is-dark is-bold" style="font-family: 'Roboto Mono', monospace; background-image: url(./resources/april.jpg); background-position: center top;">
     <div class="hero-body">
       <div class="container">
         <p class="title">
