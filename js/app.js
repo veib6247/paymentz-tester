@@ -11,21 +11,22 @@ var app = new Vue({
      * use these for getting the auth data
      */
     auth: {
-      endpoint: "https://preprod.prtpg.com/transactionServices/REST/v1/authToken",
-      response: ""
+      endpoint:
+        "https://preprod.prtpg.com/transactionServices/REST/v1/authToken",
+      response: "",
     },
     button: {
-      auth_is_processing: false
+      auth_is_processing: false,
     },
     checksum: {
       data_string: "<memberId>|<secureKey>|<merchantTransactionId>|<amount>",
-      hash: "MD5 value will appear here."
+      hash: "MD5 value will appear here.",
     },
 
     parameters_auth: [
       "authentication.partnerId=REPLACE_ME",
       "merchant.username=REPLACE_ME",
-      "authentication.sKey=REPLACE_ME"
+      "authentication.sKey=REPLACE_ME",
     ],
     parameters: [
       "authentication.memberId=REPLACE_ME",
@@ -53,16 +54,21 @@ var app = new Vue({
       "paymentBrand=REPLACE_ME",
       "paymentMode=REPLACE_ME",
       "paymentType=REPLACE_ME",
-      "authentication.checksum=REPLACE_ME"
+      "authentication.checksum=REPLACE_ME",
     ],
     request: {
       url: "https://preprod.prtpg.com/transactionServices/REST/v1/payments",
-      response: ""
+      response: "",
     },
 
     response: {
-      blank_result: "Blank"
-    }
+      blank_result: "Blank",
+    },
+
+    /**
+     * container for the redirect parameters for 3D
+     */
+    redirect_parameters: "",
   },
   /**
    * all the methods here
@@ -70,67 +76,68 @@ var app = new Vue({
   methods: {
     submit_auth_request: function () {
       // update button state
-      this.button.auth_is_processing = true
-      this.auth.response = ''
+      this.button.auth_is_processing = true;
+      this.auth.response = "";
       /**
        * post via axios,
        * apparently, the data can't be just a string so I have to use URLSearchParams
        */
-      const url = "./scripts/request_auth.php"
-      let data = new URLSearchParams()
-      data.append("url", this.auth.endpoint)
+      const url = "./scripts/request_auth.php";
+      let data = new URLSearchParams();
+      data.append("url", this.auth.endpoint);
 
       /**
        * build data string
        */
       let data_auth_string = "";
-      const textarea = document.querySelector("#txt_auth_params")
-      const param_array = textarea.value.split("\n")
+      const textarea = document.querySelector("#txt_auth_params");
+      const param_array = textarea.value.split("\n");
 
       param_array.forEach((element, index) => {
-        index !== param_array.length - 1 ?
-          (data_auth_string += element + "&") :
-          (data_auth_string += element)
+        index !== param_array.length - 1
+          ? (data_auth_string += element + "&")
+          : (data_auth_string += element);
       });
 
       // append the data string
-      data.append("data", data_auth_string)
+      data.append("data", data_auth_string);
 
       // post URL and DATA via axios
       axios
         .post(url, data)
-        .then(response => {
-          console.trace(response)
-          this.auth.response = response
+        .then((response) => {
+          console.trace(response);
+          this.auth.response = response;
         })
-        .catch(error => {
-          console.error(error)
+        .catch((error) => {
+          console.error(error);
         })
         .finally(() => {
-          this.button.auth_is_processing = false
-          document.getElementById('auth_result').scrollIntoView()
-        })
+          this.button.auth_is_processing = false;
+          document.getElementById("auth_result").scrollIntoView();
+        });
     },
 
     /**
      * method to generate the checksum
      */
     generate_checksum_hash: function () {
-      const url = "./scripts/generate_md5.php"
-      let data = new URLSearchParams()
+      const url = "./scripts/generate_md5.php";
+      let data = new URLSearchParams();
 
-      data.append("string", this.checksum.data_string)
+      data.append("string", this.checksum.data_string);
       // post via axios
-      axios.post(url, data)
-        .then(response => {
-          this.checksum.hash = response.data
+      axios
+        .post(url, data)
+        .then((response) => {
+          this.checksum.hash = response.data;
         })
-        .catch(error => {
+        .catch((error) => {
           // display error in the <p>
-          this.checksum.hash = error
+          this.checksum.hash = error;
         })
         .finally(() => {
-          this.add_to_parameters()
+          this.add_to_parameters();
         });
     },
 
@@ -157,8 +164,8 @@ var app = new Vue({
      */
     submit_request: function () {
       // update button state, start loading animation
-      this.button.auth_is_processing = true
-      this.request.response = ''
+      this.button.auth_is_processing = true;
+      this.request.response = "";
       /**
        * build data string
        */
@@ -166,44 +173,50 @@ var app = new Vue({
       let data_string = "";
 
       textarea.forEach((item, index) => {
-        index !== textarea.length - 1 ?
-          (data_string += item + "&") :
-          (data_string += item); // do not append '&' at the end of the string
+        index !== textarea.length - 1
+          ? (data_string += item + "&")
+          : (data_string += item); // do not append '&' at the end of the string
       });
 
       // initialize POST variables
-      const url = "./scripts/request_submit.php"
-      let data = new URLSearchParams()
-      data.append("url", this.request.url)
-      data.append("data", data_string)
+      const url = "./scripts/request_submit.php";
+      let data = new URLSearchParams();
+      data.append("url", this.request.url);
+      data.append("data", data_string);
 
       /**
        * if the user clicks the send request before the token was generated,
        * send a fake token to emmit error
        */
-      if (typeof this.auth.response.data != 'undefined') {
-        data.append("token", this.auth.response.data.AuthToken)
+      if (typeof this.auth.response.data != "undefined") {
+        data.append("token", this.auth.response.data.AuthToken);
       } else {
-        data.append("token", "NO_TOKEN_GENERATED")
+        data.append("token", "NO_TOKEN_GENERATED");
       }
-
 
       // post using axios
       axios
         .post(url, data)
-        .then(response => {
-          console.trace(response)
-          this.request.response = response
+        .then((response) => {
+          console.trace(response);
+          this.request.response = response;
+
+          /**
+           * check if the redirect object exist
+           */
+          if (response.data.redirect) {
+            this.redirect_parameters = response.data.redirect;
+          }
         })
-        .catch(error => {
+        .catch((error) => {
           // display the error
           this.request.response = error;
         })
         .finally(() => {
           // stop loading animation
-          this.button.auth_is_processing = false
-          document.getElementById('trx_result').scrollIntoView()
-        })
+          this.button.auth_is_processing = false;
+          document.getElementById("trx_result").scrollIntoView();
+        });
     },
 
     /**
@@ -241,7 +254,7 @@ var app = new Vue({
             "card.cvv=123",
             "paymentBrand=REPLACE_ME",
             "paymentMode=REPLACE_ME",
-            "paymentType=REPLACE_ME"
+            "paymentType=REPLACE_ME",
           ];
           this.generate_return_url();
           break;
@@ -252,7 +265,7 @@ var app = new Vue({
             "authentication.checksum=REPLACE_ME",
             "paymentType=IN",
             "idType=PID",
-            "paymentId=REPLACE_ME"
+            "paymentId=REPLACE_ME",
           ];
           break;
 
@@ -264,7 +277,7 @@ var app = new Vue({
             "amount=50.00",
             "paymentId=REPLACE_ME",
             "authentication.terminalId=REPLACE_ME",
-            "merchant.email=test@test.com"
+            "merchant.email=test@test.com",
           ];
           break;
 
@@ -279,7 +292,7 @@ var app = new Vue({
             "customer.phone=1234567890",
             "shipping.country=US",
             "shipping.postcode=111401",
-            "customer.birthDate=19981202"
+            "customer.birthDate=19981202",
           ];
           break;
 
@@ -307,7 +320,7 @@ var app = new Vue({
             "paymentBrand=VISA",
             "paymentMode=CC",
             "[customer.customerId=REPLACE_ME]",
-            "createRegistration=true"
+            "createRegistration=true",
           ];
           break;
 
@@ -322,7 +335,7 @@ var app = new Vue({
             "paymentType=DB",
             "customer.ip=192.168.0.1",
             "redirectMethod=GET/POST",
-            "[installment=3]"
+            "[installment=3]",
           ];
           this.generate_return_url();
           break;
@@ -332,14 +345,14 @@ var app = new Vue({
             "authentication.memberId=REPLACE_ME",
             "authentication.checksum=REPLACE_ME",
             "authentication.terminalId=REPLACE_ME",
-            "paymentType=DL"
+            "paymentType=DL",
           ];
           break;
 
         case "List Tokens":
           this.parameters = [
             "authentication.memberId=REPLACE_ME",
-            "authentication.checksum=REPLACE_ME"
+            "authentication.checksum=REPLACE_ME",
           ];
       }
     },
@@ -355,7 +368,41 @@ var app = new Vue({
         "/display_request_result.php";
       // push string to default parameters array
       this.parameters.push("merchantRedirectUrl=" + redir);
-    }
+    },
+
+    /**
+     * create HTML form and submit
+     */
+    goto_acs_page: function () {
+      // create the form element
+      const form = document.createElement("form");
+      document.body.appendChild(form);
+      form.method = "post";
+      form.action = this.redirect_parameters.url;
+
+      // append the parameters as text areas
+      const data = this.redirect_parameters.parameters;
+
+      // this object will contain every name=value pair one at a time
+      let obj_container = {};
+      
+      /**
+       * create inputs for each parameter and append to the form
+       */
+      for (const property in data) {
+        obj_container = data[property];
+        let input = document.createElement("input");
+        input.type = "hidden";
+        input.name = obj_container.name;
+        input.value = obj_container.value;
+
+        // add to form
+        form.appendChild(input);
+      }
+
+      // submit the created form
+      form.submit();
+    },
   },
 
   /**
@@ -370,9 +417,9 @@ var app = new Vue({
         data_string = "";
 
         this.parameters_auth.forEach((element, index) => {
-          index !== this.parameters_auth.length - 1 ?
-            (data_string += element + "\n") :
-            (data_string += element);
+          index !== this.parameters_auth.length - 1
+            ? (data_string += element + "\n")
+            : (data_string += element);
         });
 
         return data_string;
@@ -384,10 +431,10 @@ var app = new Vue({
         // clear the array
         this.parameters_auth = [];
         // push new items
-        param_array.forEach(element => {
+        param_array.forEach((element) => {
           this.parameters_auth.push(element);
         });
-      }
+      },
     },
 
     /**
@@ -399,9 +446,9 @@ var app = new Vue({
         let parameter_string = "";
         this.parameters.forEach((element, index) => {
           // if it's not the end of the array yet
-          index !== this.parameters.length - 1 ?
-            (parameter_string += element + "\n") :
-            (parameter_string += element);
+          index !== this.parameters.length - 1
+            ? (parameter_string += element + "\n")
+            : (parameter_string += element);
         });
         return parameter_string;
       },
@@ -413,11 +460,11 @@ var app = new Vue({
         // clear the array
         this.parameters = [];
         // push new items
-        param_array.forEach(element => {
+        param_array.forEach((element) => {
           this.parameters.push(element);
         });
-      }
-    }
+      },
+    },
   },
 
   /**
@@ -425,7 +472,7 @@ var app = new Vue({
    */
   mounted: function () {
     this.generate_return_url();
-  }
+  },
 });
 
 /**
@@ -439,7 +486,7 @@ Vue.component("display-auth-result", {
     <div class="columns">
       <div class="column">
         <div class="field">
-          <label for="txt_auth_response" class="label is-medium" style="font-family: 'Roboto Mono', monospace;">Headers</label>
+          <label for="txt_auth_response" class="label" style="font-family: 'Roboto Mono', monospace;">Headers</label>
           <div class="control">
             <textarea cols="30" rows="3" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.headers}}</textarea>
           </div>
@@ -448,7 +495,7 @@ Vue.component("display-auth-result", {
 
       <div class="column">
         <div class="field">
-          <label for="txt_auth_response" class="label is-medium" style="font-family: 'Roboto Mono', monospace;">Config</label>
+          <label for="txt_auth_response" class="label" style="font-family: 'Roboto Mono', monospace;">Config</label>
           <div class="control">
             <textarea cols="30" rows="3" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.config}}</textarea>
           </div>
@@ -471,7 +518,7 @@ Vue.component("display-auth-result", {
         </div>
       </article>
     </div>
-  `
+  `,
 });
 
 /**
@@ -484,7 +531,7 @@ Vue.component("display-result", {
       <div class="columns">
         <div class="column">
           <div class="field">
-            <label for="txt_auth_response" class="label is-medium" style="font-family: 'Roboto Mono', monospace;">Headers</label>
+            <label for="txt_auth_response" class="label" style="font-family: 'Roboto Mono', monospace;">Headers</label>
             <div class="control">
               <textarea cols="30" rows="3" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.headers}}</textarea>
             </div>
@@ -493,7 +540,7 @@ Vue.component("display-result", {
       
         <div class="column">
           <div class="field">
-            <label for="txt_auth_response" class="label is-medium" style="font-family: 'Roboto Mono', monospace;">Config</label>
+            <label for="txt_auth_response" class="label" style="font-family: 'Roboto Mono', monospace;">Config</label>
             <div class="control">
               <textarea cols="30" rows="3" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.config}}</textarea>
             </div>
@@ -508,5 +555,5 @@ Vue.component("display-result", {
         </div>
       </div>
     </div>
-  `
+  `,
 });

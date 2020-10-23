@@ -13,9 +13,9 @@
   <!-- font: Roboto Mono -->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
   <!-- vue -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
   <!-- production version, optimized for size and speed -->
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script> -->
   <!-- axios -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -238,6 +238,20 @@
         <!-- display request result here -->
         <display-result id="trx_result" v-if="request.response" :response="request.response">
         </display-result>
+
+
+        <br>
+        <!-- 
+          if the redirect object property exist,
+          show the user the button
+        -->
+        <div class="field" v-if="redirect_parameters">
+          <div class="control">
+            <button class="button is-small is-dark" @click="goto_acs_page">
+              Go to ACS Page
+            </button>
+          </div>
+        </div>
       </div>
 
 
