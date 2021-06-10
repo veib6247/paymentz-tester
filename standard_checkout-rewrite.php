@@ -8,7 +8,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>PRTPG - Standard Checkout Tester</title>
   <!-- bulma -->
-  <link rel="stylesheet" href="./css/bulmaswatch_yeti.min.css">
+  <link rel="stylesheet" href="./css/bulma.min.css">
   <!-- font: Roboto Mono -->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
   <!-- vue -->
@@ -27,7 +27,7 @@
 
 <body>
   <!-- hero -->
-  <section class="hero is-dark is-bold" style="font-family: 'Roboto Mono', monospace; background-image: url(./resources/april.jpg); background-position: center top;">
+  <section class="hero is-light" style="font-family: 'Roboto Mono', monospace; background-position: center top;">
     <div class="hero-body">
       <div class="container">
         <p class="title">
@@ -108,12 +108,14 @@
           <div class="field">
             <div class="control">
               <label for="" class="label is-small" style="font-family: 'Roboto Mono', monospace;">Parameters</label>
-              <textarea class="textarea is-small" name="txt_params" id="txt_params" cols="30" rows="25" placeholder="" rows="28" spellcheck="false" style="font-family: 'Roboto Mono', monospace;" v-model="parameter_to_string"></textarea>
+              <textarea class="textarea is-small" name="txt_params" id="txt_params" cols="30" rows="25" placeholder=""
+                rows="28" spellcheck="false" style="font-family: 'Roboto Mono', monospace;"
+                v-model="parameter_to_string"></textarea>
             </div>
           </div>
           <!-- submit to script to generate the form -->
           <div class="field control">
-            <button type="submit" class="button is-small is-dark" style="font-family: 'Roboto Mono', monospace;">              
+            <button type="submit" class="button is-small is-dark" style="font-family: 'Roboto Mono', monospace;">
               <span class="icon">
                 <ion-icon name="send"></ion-icon>
               </span>

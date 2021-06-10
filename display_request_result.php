@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>Display Request Results</title>
   <!-- bulma -->
-  <link rel="stylesheet" href="./css/bulmaswatch_yeti.min.css">
+  <link rel="stylesheet" href="./css/bulma.min.css">
   <!-- font: Roboto Mono -->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
   <!-- tab icon -->
@@ -19,7 +19,7 @@
 
 <body>
   <!-- hero -->
-  <section class="hero is-dark is-bold" style="font-family: 'Roboto Mono', monospace; background-image: url(./resources/april.jpg); background-position: center top;">
+  <section class="hero is-light" style="font-family: 'Roboto Mono', monospace; background-position: center top;">
     <div class="hero-body">
       <div class="container">
         <p class="title">
@@ -98,7 +98,8 @@
 
         <article class="message is-small is-dark">
           <div class="message-body">
-            If this transaction does not appear anywhere in the <span class="tag is-dark">Transaction Management moedule</span> in the gateway, please check the <strong>Rejected Transactions</strong> module instead.
+            If this transaction does not appear anywhere in the <span class="tag is-dark">Transaction Management
+              moedule</span> in the gateway, please check the <strong>Rejected Transactions</strong> module instead.
           </div>
         </article>
       </div>
@@ -106,7 +107,7 @@
 
     </div>
   </section>
-  
+
   <!-- footer -->
   <footer class="footer">
     <div class="container">

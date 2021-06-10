@@ -385,7 +385,7 @@ var app = new Vue({
 
       // this object will contain every name=value pair one at a time
       let obj_container = {};
-      
+
       /**
        * create inputs for each parameter and append to the form
        */
@@ -482,29 +482,6 @@ Vue.component("display-auth-result", {
   props: ["response"],
   template: `
     <div>
-      
-    <div class="columns">
-      <div class="column">
-        <div class="field">
-          <label for="txt_auth_response" class="label" style="font-family: 'Roboto Mono', monospace;">Headers</label>
-          <div class="control">
-            <textarea cols="30" rows="3" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.headers}}</textarea>
-          </div>
-        </div>
-      </div>
-
-      <div class="column">
-        <div class="field">
-          <label for="txt_auth_response" class="label" style="font-family: 'Roboto Mono', monospace;">Config</label>
-          <div class="control">
-            <textarea cols="30" rows="3" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.config}}</textarea>
-          </div>
-        </div>
-      </div>
-    </div>
-
-      
-
       <div class="field">
         <label for="txt_auth_response" class="label is-medium" style="font-family: 'Roboto Mono', monospace;">Data</label>
         <div class="control">
@@ -528,26 +505,6 @@ Vue.component("display-result", {
   props: ["response"],
   template: `
     <div>
-      <div class="columns">
-        <div class="column">
-          <div class="field">
-            <label for="txt_auth_response" class="label" style="font-family: 'Roboto Mono', monospace;">Headers</label>
-            <div class="control">
-              <textarea cols="30" rows="3" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.headers}}</textarea>
-            </div>
-          </div>
-        </div>
-      
-        <div class="column">
-          <div class="field">
-            <label for="txt_auth_response" class="label" style="font-family: 'Roboto Mono', monospace;">Config</label>
-            <div class="control">
-              <textarea cols="30" rows="3" class="textarea is-small" style="font-family: 'Roboto Mono', monospace;" spellcheck="false">{{response.config}}</textarea>
-            </div>
-          </div>
-        </div>
-      </div>
-      
       <div class="field">
         <label for="txt_response" class="label is-medium" style="font-family: 'Roboto Mono', monospace;">Data</label>
         <div class="control">

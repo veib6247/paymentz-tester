@@ -9,10 +9,10 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>PRTPG API Tester</title>
   <!-- bulma -->
-  <link rel="stylesheet" href="./css/bulmaswatch_yeti.min.css">
+  <link rel="stylesheet" href="./css/bulma.min.css">
   <!-- font: Roboto Mono -->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
-  
+
   <!-- vue -->
   <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
   <!-- production version, optimized for size and speed -->
@@ -23,9 +23,9 @@
 
   <!-- smooth scroll -->
   <style>
-    html {
-      scroll-behavior: smooth;
-    }
+  html {
+    scroll-behavior: smooth;
+  }
   </style>
 
   <!-- tab icon -->
@@ -38,7 +38,7 @@
 
 <body>
   <!-- hero -->
-  <section class="hero is-dark is-bold" style="font-family: 'Roboto Mono', monospace; background-image: url(./resources/april.jpg); background-position: center top;">
+  <section class="hero is-light" style="font-family: 'Roboto Mono', monospace; background-position: center top;">
     <div class="hero-body">
       <div class="container">
         <p class="title">
@@ -104,9 +104,12 @@
 
         <!-- textarea for auth parameters -->
         <div class="field">
-          <label for="txt_auth_params" class="label is-small" style="font-family: 'Roboto Mono', monospace;">Authorization Parameters</label>
+          <label for="txt_auth_params" class="label is-small"
+            style="font-family: 'Roboto Mono', monospace;">Authorization Parameters</label>
           <div class="control">
-            <textarea name="txt_auth_params" id="txt_auth_params" class="textarea is-small" placeholder="" rows="3" spellcheck="false" style="font-family: 'Roboto Mono', monospace;" v-model="build_auth_data_string"></textarea>
+            <textarea name="txt_auth_params" id="txt_auth_params" class="textarea is-small" placeholder="" rows="3"
+              spellcheck="false" style="font-family: 'Roboto Mono', monospace;"
+              v-model="build_auth_data_string"></textarea>
           </div>
         </div>
 
@@ -139,14 +142,18 @@
           Generate a Checksum
         </h2>
         <p class="is-size-7">
-          Our system will generate the hash string. You only need to input the correct format. This is required to check the integrity of the request.
+          Our system will generate the hash string. You only need to input the correct format. This is required to check
+          the integrity of the request.
         </p>
         <br />
 
-        <label for="txt_checksum_string" class="label is-small" style="font-family: 'Roboto Mono', monospace;">Checksum Data</label>
+        <label for="txt_checksum_string" class="label is-small" style="font-family: 'Roboto Mono', monospace;">Checksum
+          Data</label>
         <div class="field has-addons">
           <div class="control is-expanded">
-            <input type="text" name="txt_checksum_string" id="txt_checksum_string" class="input is-small" spellcheck="false" style="font-family: 'Roboto Mono', monospace;" v-model="checksum.data_string" @blur="generate_checksum_hash" @change="generate_checksum_hash">
+            <input type="text" name="txt_checksum_string" id="txt_checksum_string" class="input is-small"
+              spellcheck="false" style="font-family: 'Roboto Mono', monospace;" v-model="checksum.data_string"
+              @blur="generate_checksum_hash" @change="generate_checksum_hash">
           </div>
           <div class="control">
             <div class="select is-small">
@@ -196,23 +203,30 @@
           Fill up additional parameters
         </h2>
 
-        <label for="txt_request_endpoint" class="label is-small" style="font-family: 'Roboto Mono', monospace;">API Endpoint</label>
+        <label for="txt_request_endpoint" class="label is-small" style="font-family: 'Roboto Mono', monospace;">API
+          Endpoint</label>
         <div class="field has-addons">
           <div class="control is-expanded">
-            <input type="text" name="txt_request_endpoint" id="txt_request_endpoint" class="input is-small" spellcheck="false" style="font-family: 'Roboto Mono', monospace;" v-model="request.url">
+            <input type="text" name="txt_request_endpoint" id="txt_request_endpoint" class="input is-small"
+              spellcheck="false" style="font-family: 'Roboto Mono', monospace;" v-model="request.url">
           </div>
           <div class="control">
             <div class="select is-small">
               <!-- call method when value changes -->
-              <select v-model="request.url" @change="update_paramenters($event)" style="font-family: 'Roboto Mono', monospace;">
+              <select v-model="request.url" @change="update_paramenters($event)"
+                style="font-family: 'Roboto Mono', monospace;">
                 <option value="https://preprod.prtpg.com/transactionServices/REST/v1/payments">Synchronous</option>
                 <option value="https://preprod.prtpg.com/transactionServices/REST/v1/payments/{id}">Back Office</option>
                 <option value="https://preprod.prtpg.com/transactionServices/REST/v1/payout">Payout</option>
                 <option value="https://preprod.prtpg.com/merchantServices/api/v1/customerSignup">Cx Signup</option>
-                <option value="https://preprod.prtpg.com/transactionServices/REST/v1/registrations">RG (Standalone)</option>
-                <option value="https://preprod.prtpg.com/transactionServices/REST/v1/paywithtoken/{id}">Trx w/ Token</option>
-                <option value="https://preprod.prtpg.com/transactionServices/REST/v1/paywithtoken/[id]">Delete Token</option>
-                <option value="https://preprod.prtpg.com/transactionServices/REST/v1/getCardsAndAccounts">List Tokens</option>
+                <option value="https://preprod.prtpg.com/transactionServices/REST/v1/registrations">RG (Standalone)
+                </option>
+                <option value="https://preprod.prtpg.com/transactionServices/REST/v1/paywithtoken/{id}">Trx w/ Token
+                </option>
+                <option value="https://preprod.prtpg.com/transactionServices/REST/v1/paywithtoken/[id]">Delete Token
+                </option>
+                <option value="https://preprod.prtpg.com/transactionServices/REST/v1/getCardsAndAccounts">List Tokens
+                </option>
               </select>
             </div>
           </div>
@@ -221,9 +235,11 @@
 
 
         <div class="field">
-          <label for="txt_param" class="label is-small" style="font-family: 'Roboto Mono', monospace;">Parameters</label>
+          <label for="txt_param" class="label is-small"
+            style="font-family: 'Roboto Mono', monospace;">Parameters</label>
           <div class="control">
-            <textarea id="txt_param" class="textarea is-small" placeholder="" rows="28" spellcheck="false" style="font-family: 'Roboto Mono', monospace;" v-model="parameter_string"></textarea>
+            <textarea id="txt_param" class="textarea is-small" placeholder="" rows="28" spellcheck="false"
+              style="font-family: 'Roboto Mono', monospace;" v-model="parameter_string"></textarea>
           </div>
         </div>
 
