@@ -22,12 +22,37 @@
   <section class="hero is-light" style="font-family: 'Roboto Mono', monospace; background-position: center top;">
     <div class="hero-body">
       <div class="container">
-        <p class="title">
-          PRTPG Gateway Tester
-          <span class="icon">
-            <ion-icon name="construct"></ion-icon>
-          </span>
-        </p>
+
+        <div class="columns">
+          <div class="column is-four-fifths">
+            <p class="title">
+              PRTPG Gateway Tester
+              <span class="icon">
+                <ion-icon name="construct"></ion-icon>
+              </span>
+            </p>
+          </div>
+
+          <div class="column">
+            <div class="box">
+              <p class="subtitle has-text-centered">Was this tool useful?</p>
+              <div class="field">
+                <div class="control">
+                  <a class="button is-rounded is-dark" href="https://paypal.me/bryanolandres?locale.x=en_US"
+                    target="_blank">
+                    <span class="icon">
+                      <ion-icon name="logo-paypal"></ion-icon>
+                    </span>
+                    <span>
+                      Consider Donating!
+                    </span>
+                  </a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
     <div class="hero-foot">

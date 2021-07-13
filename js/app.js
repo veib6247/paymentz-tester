@@ -376,7 +376,7 @@ var app = new Vue({
       // create the form element
       const form = document.createElement('form')
       document.body.appendChild(form)
-      form.method = 'post'
+      form.method = 'POST'
       form.action = this.redirect_parameters.url
 
       // append the parameters as text areas
