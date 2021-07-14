@@ -40,6 +40,7 @@ var app = new Vue({
         'reservedField1=',
         'paymentMode=REPLACE_ME',
         'paymentBrand=REPLACE_ME',
+        'notificationUrl=https://bryanolandres.xyz/prtpg/scripts/notifications.php',
         'checksum=REPLACE_ME',
       ],
     },

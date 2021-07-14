@@ -54,6 +54,7 @@ var app = new Vue({
       'paymentBrand=REPLACE_ME',
       'paymentMode=REPLACE_ME',
       'paymentType=REPLACE_ME',
+      'notificationUrl=https://bryanolandres.xyz/prtpg/scripts/notifications.php',
       'authentication.checksum=REPLACE_ME',
     ],
     request: {
@@ -255,6 +256,7 @@ var app = new Vue({
             'paymentBrand=REPLACE_ME',
             'paymentMode=REPLACE_ME',
             'paymentType=REPLACE_ME',
+            'notificationUrl=https://bryanolandres.xyz/prtpg/scripts/notifications.php',
           ]
           this.generate_return_url()
           break
