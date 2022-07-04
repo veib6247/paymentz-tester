@@ -5,7 +5,10 @@
 
 
   // database variables by order of usage in mysqli_connect
-  
+  $databaseServerName = "localhost";  
+  $databaseUser = "fukazer0";
+  $databasePassword = "Hc&EBCJjMc6z7zfq";
+  $databaseName = "TheHolyGrail";
 
 
   // create the connection

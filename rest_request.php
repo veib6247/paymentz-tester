@@ -13,11 +13,6 @@
   <!-- font: Roboto Mono -->
   <link href="https://fonts.googleapis.com/css?family=Roboto+Mono&display=swap" rel="stylesheet">
 
-  <!-- vue -->
-  <!-- <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script> -->
-  <!-- production version, optimized for size and speed -->
-  <script src="https://cdn.jsdelivr.net/npm/vue"></script>
-
   <!-- axios -->
   <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 
@@ -357,6 +352,11 @@
       </div>
     </div>
   </footer>
+
+  <!-- self host vue 2 -->
+  <script src="./js/vue.min.js"></script>
+
+  <!-- local js -->
   <script src="./js/app.js"></script>
 </body>
 

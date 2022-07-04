@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>PZ - Query API</title>
+
+    <!-- css -->
+    <link rel="stylesheet" href="./css/style.css" />
+
+    <!-- vue js -->
+    <script src="https://unpkg.com/vue@next"></script>
+
+    <!-- font awesome for icons-->
+    <script
+      defer
+      src="https://use.fontawesome.com/releases/v5.3.1/js/all.js"
+    ></script>
+  </head>
+  <body>
+    <!-- entire vue app -->
+    <div id="app">
+      <!-- hero section -->
+      <section class="section mainFont">
+        <div class="container is-fluid">
+          <p class="title">PZ Query API</p>
+        </div>
+      </section>
+
+      <!-- main section for the entire stuff -->
+      <section class="section mainFont">
+        <div class="container is-fluid">
+          <div class="columns">
+            <!-- left column for the auth -->
+            <div class="column is-one-third">
+              <div class="notification">
+                <p class="title is-5">Authenticate</p>
+                <!-- partner ID -->
+                <div class="field">
+                  <p class="control is-expanded has-icons-left">
+                    <input
+                      class="input is-small mainFont"
+                      type="text"
+                      placeholder="PSP Partner ID"
+                      v-model="pspPartnerID"
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="far fa-id-badge"></i>
+                    </span>
+                  </p>
+                </div>
+
+                <!-- merchant username -->
+                <div class="field">
+                  <p class="control is-expanded has-icons-left">
+                    <input
+                      class="input is-small mainFont"
+                      type="text"
+                      placeholder="Merchant Username"
+                      v-model="merchantUsername"
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-user"></i>
+                    </span>
+                  </p>
+                </div>
+
+                <!-- sKey -->
+                <div class="field">
+                  <p class="control is-expanded has-icons-left">
+                    <input
+                      class="input is-small mainFont"
+                      type="password"
+                      placeholder="Merchant sKey"
+                      v-model="merchantSKey"
+                    />
+                    <span class="icon is-small is-left">
+                      <i class="fas fa-key"></i>
+                    </span>
+                  </p>
+                </div>
+
+                <!-- select field for the endpoints to test -->
+                <div class="field has-addons">
+                  <div class="control is-expanded">
+                    <div class="select is-small is-fullwidth">
+                      <select
+                        class="mainFont is-small"
+                        v-model="apiSelectedEndpoint"
+                      >
+                        <option v-for="endpoint in apiEndpoints">
+                          {{endpoint}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="control">
+                    <button
+                      type="submit"
+                      class="button is-small is-dark mainFont"
+                      :class="{'is-loading': getTokenButtonLoading}"
+                      @click="submitGetAuthToken"
+                    >
+                      Submit
+                    </button>
+                  </div>
+                </div>
+
+                <!-- display to user status of auth -->
+                <div v-if="getTokenResponse">
+                  <article
+                    class="message is-small"
+                    :class="{'is-danger': getTokenResponse.result.code != 200, 'is-success': getTokenResponse.result.code == 200}"
+                  >
+                    <div class="message-body">
+                      <p class="heading">
+                        <strong>Code: {{getTokenResponse.result.code}}</strong>
+                      </p>
+                      <p>{{getTokenResponse.result.description}}</p>
+                    </div>
+                  </article>
+                </div>
+              </div>
+            </div>
+
+            <!-- right column for the query parts -->
+            <div class="column"></div>
+          </div>
+
+          <!-- display merchant info -->
+          <div v-if="getTokenResponse">
+            <div
+              class="notification"
+              v-if="getTokenResponse.result.code == '200'"
+            >
+              <div class="has-text-centered">
+                <div>
+                  <p class="heading">Member ID</p>
+                  <p class="title is-5">{{getTokenResponse.memberId}}</p>
+                </div>
+              </div>
+              <br />
+              <nav class="level">
+                <!-- left items for the level -->
+                <div class="level-left">
+                  <div class="level-item">
+                    <p class="title is-6">Status</p>
+                  </div>
+
+                  <!-- status select -->
+                  <div class="level-item">
+                    <div class="select is-small">
+                      <select class="mainFont" v-model="selectedStatus">
+                        <option v-for="status in statusSelect">
+                          {{status}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- right items for the level -->
+                <div class="level-right">
+                  <!-- date range from -->
+                  <div class="level-item">
+                    <div class="field has-addons">
+                      <p class="control">
+                        <a class="button is-small is-static">From</a>
+                      </p>
+                      <p class="control">
+                        <input
+                          type="date"
+                          class="input is-small mainFont"
+                          v-model="rangeFrom"
+                        />
+                      </p>
+                    </div>
+                  </div>
+
+                  <!-- date to -->
+                  <div class="level-item">
+                    <div class="field has-addons">
+                      <p class="control">
+                        <a class="button is-small is-static">To</a>
+                      </p>
+                      <p class="control">
+                        <input
+                          type="date"
+                          class="input is-small mainFont"
+                          v-model="rangeTo"
+                        />
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              </nav>
+
+              <div class="field has-addons">
+                <div class="control is-expanded">
+                  <!-- select query endpoint -->
+                  <div class="select is-small is-fullwidth">
+                    <select class="mainFont" v-model="selectedqueryEndpoint">
+                      <option v-for="endpoint in queryEndpoints">
+                        {{endpoint}}
+                      </option>
+                    </select>
+                  </div>
+                </div>
+                <!-- query button -->
+                <div class="control">
+                  <a
+                    class="button is-small is-dark"
+                    :class="{'is-loading': queryButtonLoading}"
+                    @click="getQuery"
+                    >Submit Query</a
+                  >
+                </div>
+              </div>
+
+              <!-- display component when there are results of the query -->
+              <div v-if="queryResult">
+                <article
+                  class="message is-danger is-size-7 is-danger"
+                  v-if="queryResult.result.code != '00029'"
+                >
+                  <div class="message-body">
+                    {{queryResult.result.description}}
+                  </div>
+                </article>
+                <div v-else>
+                  <p class="heading">
+                    Found
+                    <strong>{{queryResult.transaction.length}}</strong> records.
+                  </p>
+                  <div class="table-container">
+                    <table
+                      class="
+                        table
+                        is-size-7 is-striped is-narrow is-hoverable is-fullwidth
+                      "
+                    >
+                      <!-- table content -->
+                      <thead>
+                        <tr>
+                          <th style="text-align: center">Amount</th>
+                          <th style="text-align: center">Currency</th>
+                          <th style="text-align: center">Tracking ID</th>
+                          <th style="text-align: center">
+                            Merchant Transaction ID
+                          </th>
+                          <th style="text-align: center">Status</th>
+                          <th style="text-align: center">Capture Amount</th>
+                          <th style="text-align: center">Transaction Date</th>
+                          <th style="text-align: center">Remark</th>
+                          <th style="text-align: center">Customer</th>
+                          <th style="text-align: center">BIN</th>
+                          <th style="text-align: center">Last 4</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr v-for="transaction in queryResult.transaction">
+                          <td style="text-align: right">
+                            {{transaction.amount}}
+                          </td>
+                          <td style="text-align: center">
+                            {{transaction.currency}}
+                          </td>
+                          <td>{{transaction.systemPaymentId}}</td>
+                          <td>{{transaction.merchantTransactionId}}</td>
+                          <td>{{transaction.transactionStatus}}</td>
+                          <td style="text-align: center">
+                            {{transaction.captureamount}}
+                          </td>
+                          <td>{{transaction.transactionDate}}</td>
+                          <td>{{transaction.remark}}</td>
+                          <td>
+                            {{transaction.customer.givenName + " " +
+                            transaction.customer.surname}}
+                          </td>
+                          <td style="text-align: right">
+                            {{transaction.card.bin}}
+                          </td>
+                          <td style="text-align: right">
+                            {{transaction.card.lastFourDigits}}
+                          </td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </div>
+
+    <footer class="footer"></footer>
+
+    <!-- main js file -->
+    <script src="./js/index.js"></script>
+  </body>
+</html>
