@@ -1,4 +1,4 @@
-<?php include "./scripts/components.php";  ?>
+<?php include "./scripts/components.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -37,36 +37,12 @@
     <div class="hero-body">
       <div class="container">
 
-        <div class="columns">
-          <div class="column is-four-fifths">
-            <p class="title">
-              PRTPG Gateway Tester
-              <span class="icon">
-                <ion-icon name="construct"></ion-icon>
-              </span>
-            </p>
-          </div>
-
-          <div class="column">
-            <div class="box">
-              <p class="subtitle has-text-centered">Was this tool useful?</p>
-              <div class="field">
-                <div class="control">
-                  <a class="button is-rounded is-dark" href="https://paypal.me/bryanolandres?locale.x=en_US"
-                    target="_blank">
-                    <span class="icon">
-                      <ion-icon name="logo-paypal"></ion-icon>
-                    </span>
-                    <span>
-                      Consider Donating!
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-
+      <p class="title">
+        PRTPG Gateway Tester
+        <span class="icon">
+          <ion-icon name="construct"></ion-icon>
+        </span>
+      </p>
 
       </div>
     </div>
@@ -111,17 +87,17 @@
 
 
         <?=
-          input(
-            'txt_auth_endpoint',
-            'txt_auth_endpoint',
-            'API Endpoint',
-            'e.g. https://preprod.prtpg.com/transactionServices/REST/v1/authToken',
-            '',
-            '',
-            '',
-            'v-model="auth.endpoint" '
-          )
-        ?>
+input(
+ 'txt_auth_endpoint',
+ 'txt_auth_endpoint',
+ 'API Endpoint',
+ 'e.g. https://preprod.prtpg.com/transactionServices/REST/v1/authToken',
+ '',
+ '',
+ '',
+ 'v-model="auth.endpoint" '
+)
+?>
 
         <!-- textarea for auth parameters -->
         <div class="field">
@@ -135,14 +111,14 @@
         </div>
 
         <?=
-          button(
-            'btn_auth',
-            'btn_auth',
-            'Get Auth Key',
-            'is-small is-dark',
-            '@click="submit_auth_request" :class="{\'is-loading\': button.auth_is_processing}" '
-          )
-        ?>
+button(
+ 'btn_auth',
+ 'btn_auth',
+ 'Get Auth Key',
+ 'is-small is-dark',
+ '@click="submit_auth_request" :class="{\'is-loading\': button.auth_is_processing}" '
+)
+?>
 
 
         <!-- display component -->
@@ -265,14 +241,14 @@
         </div>
 
         <?=
-          button(
-            'btn_submit_request',
-            'btn_submit_request',
-            'Submit Request',
-            'is-small is-dark',
-            '@click="submit_request" :class="{\'is-loading\': button.auth_is_processing}" '
-          )
-        ?>
+button(
+ 'btn_submit_request',
+ 'btn_submit_request',
+ 'Submit Request',
+ 'is-small is-dark',
+ '@click="submit_request" :class="{\'is-loading\': button.auth_is_processing}" '
+)
+?>
 
         <!-- display request result here -->
         <display-result id="trx_result" v-if="request.response" :response="request.response">
@@ -280,7 +256,7 @@
 
 
         <br>
-        <!-- 
+        <!--
           if the redirect object property exist,
           show the user the button
         -->
@@ -358,6 +334,17 @@
 
   <!-- local js -->
   <script src="./js/app.js"></script>
+
+  <!-- ko-fi floating widget button -->
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script>
+    kofiWidgetOverlay.draw('fukazer0', {
+      'type': 'floating-chat',
+      'floating-chat.donateButton.text': 'Support me',
+      'floating-chat.donateButton.background-color': '#5bc0de',
+      'floating-chat.donateButton.text-color': '#323842'
+    });
+  </script>
 </body>
 
 </html>

@@ -1,4 +1,4 @@
-<?php include "./scripts/components.php";  ?>
+<?php include "./scripts/components.php";?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -27,34 +27,12 @@
   <section class="hero is-light" style="font-family: 'Roboto Mono', monospace; background-position: center top;">
     <div class="hero-body">
       <div class="container">
-        <div class="columns">
-          <div class="column is-four-fifths">
-            <p class="title">
-              PRTPG Gateway Tester
-              <span class="icon">
-                <ion-icon name="construct"></ion-icon>
-              </span>
-            </p>
-          </div>
-          <div class="column">
-            <div class="box">
-              <p class="subtitle has-text-centered">Was this tool useful?</p>
-              <div class="field">
-                <div class="control">
-                  <a class="button is-rounded is-dark" href="https://paypal.me/bryanolandres?locale.x=en_US"
-                    target="_blank">
-                    <span class="icon">
-                      <ion-icon name="logo-paypal"></ion-icon>
-                    </span>
-                    <span>
-                      Consider Donating!
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <p class="title">
+        PRTPG Gateway Tester
+        <span class="icon">
+          <ion-icon name="construct"></ion-icon>
+        </span>
+      </p>
 
 
       </div>
@@ -91,40 +69,40 @@
       <div class="notification">
         <form action="./scripts/parameter_receiver.php" method="post">
           <?=
-            input(
-              'txt_endpoint',
-              'txt_endpoint',
-              'API Endpoint',
-              '',
-              'Determine which endpoint to send the transaction',
-              '',
-              '',
-              'v-model="request.endpoint" '
-            )
-          ?>
+input(
+ 'txt_endpoint',
+ 'txt_endpoint',
+ 'API Endpoint',
+ '',
+ 'Determine which endpoint to send the transaction',
+ '',
+ '',
+ 'v-model="request.endpoint" '
+)
+?>
 
           <?=
-            input(
-              'txt_checksum',
-              'txt_checksum',
-              'Checksum Data',
-              '<memberId>|<toType>|<amount>|<merchantTransactionId>|<merchantRedirectUrl>|<secureKey>',
-              'Generated Hash: <span class="tag is-dark">{{checksum.hash}}</span>',
-              '',
-              '',
-              'v-model="checksum.data" @blur="generate_hash" @change="generate_hash" required'
-            )
-          ?>
+input(
+ 'txt_checksum',
+ 'txt_checksum',
+ 'Checksum Data',
+ '<memberId>|<toType>|<amount>|<merchantTransactionId>|<merchantRedirectUrl>|<secureKey>',
+ 'Generated Hash: <span class="tag is-dark">{{checksum.hash}}</span>',
+ '',
+ '',
+ 'v-model="checksum.data" @blur="generate_hash" @change="generate_hash" required'
+)
+?>
 
           <?php // replace with <?= to echo the button
-          // button(
-          //   'btn_add_to_params',
-          //   'btn_add_to_params',
-          //   'Add to parameters',
-          //   'is-small is-primary',
-          //   '@click="add_to_params" '
-          // )
-          ?>
+// button(
+//   'btn_add_to_params',
+//   'btn_add_to_params',
+//   'Add to parameters',
+//   'is-small is-primary',
+//   '@click="add_to_params" '
+// )
+?>
 
           <div class="field">
             <div class="control">
@@ -208,6 +186,17 @@
 
   <!-- local js -->
   <script src="./js/standard_checkout.js"></script>
+
+  <!-- ko-fi floating widget button -->
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script>
+    kofiWidgetOverlay.draw('fukazer0', {
+      'type': 'floating-chat',
+      'floating-chat.donateButton.text': 'Support me',
+      'floating-chat.donateButton.background-color': '#5bc0de',
+      'floating-chat.donateButton.text-color': '#323842'
+    });
+  </script>
 </body>
 
 </html>

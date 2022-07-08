@@ -23,35 +23,12 @@
     <div class="hero-body">
       <div class="container">
 
-        <div class="columns">
-          <div class="column is-four-fifths">
-            <p class="title">
-              PRTPG Gateway Tester
-              <span class="icon">
-                <ion-icon name="construct"></ion-icon>
-              </span>
-            </p>
-          </div>
-
-          <div class="column">
-            <div class="box">
-              <p class="subtitle has-text-centered">Was this tool useful?</p>
-              <div class="field">
-                <div class="control">
-                  <a class="button is-rounded is-dark" href="https://paypal.me/bryanolandres?locale.x=en_US"
-                    target="_blank">
-                    <span class="icon">
-                      <ion-icon name="logo-paypal"></ion-icon>
-                    </span>
-                    <span>
-                      Consider Donating!
-                    </span>
-                  </a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+      <p class="title">
+        PRTPG Gateway Tester
+        <span class="icon">
+          <ion-icon name="construct"></ion-icon>
+        </span>
+      </p>
 
       </div>
     </div>
@@ -106,14 +83,14 @@
           <table class="table is-size-7 is-bordered is-striped is-narrow is-hoverable is-fullwidth">
             <tbody>
               <?php
-              foreach ($_POST as $key => $value) {
-                echo '
+foreach ($_POST as $key => $value) {
+ echo '
                 <tr>
                   <td>' . $key . '</td>
                   <td>' . $value . '</td>
                 </tr>';
-              }
-              ?>
+}
+?>
 
             </tbody>
           </table>
@@ -187,6 +164,17 @@
       </div>
     </div>
   </footer>
+
+  <!-- ko-fi floating widget button -->
+  <script src='https://storage.ko-fi.com/cdn/scripts/overlay-widget.js'></script>
+  <script>
+    kofiWidgetOverlay.draw('fukazer0', {
+      'type': 'floating-chat',
+      'floating-chat.donateButton.text': 'Support me',
+      'floating-chat.donateButton.background-color': '#5bc0de',
+      'floating-chat.donateButton.text-color': '#323842'
+    });
+</script>
 </body>
 
 </html>
